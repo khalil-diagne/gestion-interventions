@@ -18,9 +18,9 @@ const submit = () => {
 <template>
     <Head title="Inscription" />
 
-    <div class="flex min-h-screen items-center justify-center bg-[#060b14] px-4 py-10 g-grid">
-        <div class="w-full max-w-[480px] ml-auto mr-4 lg:mr-20">
-            <div class="cyber-card rounded-[26px] p-7 sm:p-9">
+    <div class="flex min-h-screen items-center justify-center bg-[#060b14] px-4 py-10 dark">
+        <div class="w-full max-w-[480px]">
+            <div class="cyber-card rounded-[26px] p-6 sm:p-9">
                 <p class="text-[11px] mono tracking-[0.22em] text-[#57c8ff] uppercase mb-1">
                     ATECH &bull; ONBOARDING
                 </p>

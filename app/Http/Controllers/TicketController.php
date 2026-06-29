@@ -49,11 +49,18 @@ class TicketController extends Controller
 
     public function create()
     {
+        if (request()->user()->isTechnicien()) {
+            return redirect()->route('tickets.index')->with('error', 'Vous n\'êtes pas autorisé à créer des tickets.');
+        }
         return Inertia::render('Ticket/Create');
     }
 
     public function store(Request $request)
     {
+        if ($request->user()->isTechnicien()) {
+            return redirect()->route('tickets.index')->with('error', 'Vous n\'êtes pas autorisé à créer des tickets.');
+        }
+
         $data = $request->validate([
             'titre' => 'required|string|max:255',
             'description' => 'required|string',

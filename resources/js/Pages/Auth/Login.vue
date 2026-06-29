@@ -2,12 +2,9 @@
 import { Head, Link, useForm } from '@inertiajs/vue3';
 
 const form = useForm({
-    email: 'lea.morel@client.fr',
-    password: 'client123',
-    role: 'Client',
+    email: '',
+    password: '',
 });
-
-const roles = ['Client', 'Technicien', 'Admin'];
 
 const submit = () => {
     form.post(route('login'), {
@@ -19,9 +16,9 @@ const submit = () => {
 <template>
     <Head title="Connexion" />
 
-    <div class="flex min-h-screen items-center justify-center bg-[#060b14] px-4 py-10 g-grid">
-        <div class="w-full max-w-[480px] ml-auto mr-4 lg:mr-20">
-            <div class="cyber-card rounded-[26px] p-7 sm:p-9">
+    <div class="flex min-h-screen items-center justify-center bg-[#060b14] px-4 py-10 dark">
+        <div class="w-full max-w-[480px]">
+            <div class="cyber-card rounded-[26px] p-6 sm:p-9">
                 <p class="text-[11px] mono tracking-[0.22em] text-[#57c8ff] uppercase mb-1">
                     ATECH PORTAL ACCESS
                 </p>
@@ -61,29 +58,6 @@ const submit = () => {
                         <p v-if="form.errors.password" class="mt-1.5 text-xs text-[#ff8b95]">{{ form.errors.password }}</p>
                     </div>
 
-                    <div class="mb-5">
-                        <p class="label">Rôle</p>
-                        <div class="grid grid-cols-3 gap-2">
-                            <button
-                                v-for="role in roles"
-                                :key="role"
-                                type="button"
-                                class="rounded-xl border py-2.5 text-[13px] font-semibold transition-all duration-200"
-                                :class="form.role === role
-                                    ? 'border-[#43c9ff] bg-[#0f2b45] text-main'
-                                    : 'border-subtle text-muted bg-transparent hover:border-subtle'"
-                                @click="form.role = role"
-                            >
-                                {{ role }}
-                            </button>
-                        </div>
-                        <input type="hidden" v-model="form.role" />
-                    </div>
-
-                    <div v-if="form.errors.role" class="mb-4 text-xs text-[#ff8b95]">
-                        {{ form.errors.role }}
-                    </div>
-
                     <button
                         type="submit"
                         class="btn-cyber w-full py-3 text-[15px]"
@@ -100,24 +74,6 @@ const submit = () => {
                         Créer un compte
                     </Link>
                 </p>
-
-                <div class="mt-7 pt-5 border-t border-subtle">
-                    <p class="text-[11px] mono text-muted uppercase tracking-wider mb-3">Comptes de démonstration</p>
-                    <div class="space-y-2 mono text-xs text-muted">
-                        <div class="flex justify-between">
-                            <span class="text-sub">Client</span>
-                            <span>lea.morel@client.fr / client123</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span class="text-sub">Technicien</span>
-                            <span>tech@atech.fr / technicien123</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span class="text-sub">Admin</span>
-                            <span>admin@atech.fr / admin123</span>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

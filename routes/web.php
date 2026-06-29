@@ -22,6 +22,10 @@ Route::get('/', function () {
 })->name('home');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/about', function () {
+        return Inertia::render('About');
+    })->name('about');
+
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/tickets', [TicketController::class, 'index'])->name('tickets.index');

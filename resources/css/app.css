@@ -112,6 +112,7 @@
     background: var(--bg);
     color: var(--text-primary);
     -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
   }
 
   ::-webkit-scrollbar { width:6px; height:6px; }
@@ -207,6 +208,8 @@
 }
 
 @layer utilities {
+  .text-accent { color: var(--accent); }
+  .border-accent { border-color: var(--accent); }
   .badge-critique { @apply chip; background: var(--critique-bg); color: var(--critique-text); }
   .badge-haute    { @apply chip; background: var(--haute-bg); color: var(--haute-text); }
   .badge-moyenne  { @apply chip; background: var(--moyenne-bg); color: var(--moyenne-text); }
