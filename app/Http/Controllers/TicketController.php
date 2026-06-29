@@ -131,7 +131,18 @@ class TicketController extends Controller
 
     public function updateStatus(Request $request, Ticket $ticket)
     {
-        $data = $request->validate(['statut' => 'required|in:Ouvert,En cours,Rapport en rédaction,Résolu,Fermé']);
+        $data = $request->validate(['statut' => 'required|in:Ouvert,En cours,Rapport en rédaction,Résolu,Fermé,Annulé']);
+
+        // Autorisation : seul le client propriétaire ou l'admin peut annuler
+        if ($data['statut'] === 'Annulé') {
+            if (!$request->user()->isAdmin() && $ticket->client_id !== $request->user()->id) {
+                return back()->with('error', 'Vous n\'êtes pas autorisé à annuler ce ticket.');
+            }
+            // Optionnel : empêcher l'annulation si déjà en cours ?
+            // if ($ticket->statut !== 'Ouvert' && !$request->user()->isAdmin()) {
+            //     return back()->with('error', 'Impossible d\'annuler un ticket en cours.');
+            // }
+        }
 
         $ticket->update($data);
 

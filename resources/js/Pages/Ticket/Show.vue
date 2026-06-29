@@ -33,6 +33,7 @@ const statusBadgeClass = (status) => ({
     'Rapport en rédaction': 'badge-rapport',
     'Résolu': 'badge-resolu',
     'Fermé': 'badge-ferme',
+    'Annulé': 'badge-ferme',
 }[status] || 'badge-ferme')
 
 const priorityBadgeClass = (priority) => ({
@@ -395,7 +396,7 @@ function assignTechnicien() {
                         <div class="border-t border-subtle pt-4">
                             <h4 class="text-[11px] uppercase tracking-[0.15em] text-muted font-semibold mb-3">Changer le statut</h4>
                             <div class="grid grid-cols-2 gap-2">
-                                <button v-for="s in ['Ouvert','En cours','Rapport en rédaction','Résolu','Fermé']" :key="s"
+                                <button v-for="s in ['Ouvert','En cours','Rapport en rédaction','Résolu','Fermé', 'Annulé']" :key="s"
                                     @click="updateStatus(s)"
                                     :disabled="statusUpdateProcessing || ticket.statut === s"
                                     class="rounded-xl text-[12px] font-semibold py-2 px-3 transition-colors border"
@@ -405,6 +406,15 @@ function assignTechnicien() {
                                 >{{ s }}</button>
                             </div>
                         </div>
+                    </div>
+
+                    <div v-if="user?.role === 'client' && ticket.statut === 'Ouvert'" class="cyber-card rounded-[20px] p-5">
+                        <h4 class="text-[11px] uppercase tracking-[0.15em] text-muted font-semibold mb-4">Actions</h4>
+                        <button
+                            @click="updateStatus('Annulé')"
+                            :disabled="statusUpdateProcessing"
+                            class="rounded-xl text-[12px] font-semibold py-2 px-3 transition-colors border border-[#ff5c7a] bg-[#ff5c7a]/15 text-[#ff5c7a] hover:bg-[#ff5c7a]/25 w-full"
+                        >Annuler le ticket</button>
                     </div>
 
                     <div v-if="user?.role === 'technicien'" class="cyber-card rounded-[20px] p-5 space-y-3">
